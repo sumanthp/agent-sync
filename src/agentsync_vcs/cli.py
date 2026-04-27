@@ -121,7 +121,7 @@ def handle_pull(target):
     print(f"Successfully pulled rules for {target}")
 
 def main():
-    parser = argparse.ArgumentParser(prog="agent-sync")
+    parser = argparse.ArgumentParser(prog="agentsync-vcs")
     subparsers = parser.add_subparsers(dest="command")
 
     subparsers.add_parser("init")

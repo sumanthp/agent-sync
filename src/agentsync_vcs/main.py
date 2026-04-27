@@ -18,7 +18,7 @@ ADAPTERS = {
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python -m compiler.main <target> <file1> <file2> ...")
+        print("Usage: python -m agentsync_vcs.main <target> <file1> <file2> ...")
         sys.exit(1)
     
     target = sys.argv[1].lower()

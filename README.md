@@ -1,10 +1,10 @@
-# agent-sync
+# agentsync-vcs
 
 Universal Agent VCS and package manager for AI Agent behaviors.
 
 ## Overview
 
-`agent-sync` allows you to define AI agent rules and contexts in a single, universal Markdown format and compile them into native configurations for various AI tools.
+`agentsync-vcs` allows you to define AI agent rules and contexts in a single, universal Markdown format and compile them into native configurations for various AI tools.
 
 ### Supported Targets
 - **Cursor**: `.cursor/rules/*.mdc`
@@ -17,25 +17,19 @@ Universal Agent VCS and package manager for AI Agent behaviors.
 
 ### Prerequisites
 - Python 3.8+
-- Go 1.21+ (to build the CLI)
 
-### Building the CLI
-1. Clone the repository.
-2. Run `go build -o agent-sync ./cmd/agent-sync`
-3. Add the resulting binary to your PATH.
-
-### Python Dependencies
+### Install via pip
 ```bash
-pip install -r requirements.txt
+pip install agentsync-vcs
 ```
 
 ## Usage
 
 ### Initialize a project
 ```bash
-agent-sync init
+agentsync-vcs init
 ```
-This creates a `sample-rule.md` file.
+This creates a `sample-rule.md` file and a `.agent-sync/` configuration folder.
 
 ### Define a Rule
 Create a `.md` file with YAML frontmatter:
@@ -52,9 +46,9 @@ globs: ["src/**/*.ts"]
 ### Remote Syncing
 Sync rules from a shared team repository:
 ```bash
-agent-sync remote add https://github.com/my-org/agent-rules.git
-agent-sync sync
-agent-sync pull cursor
+agentsync-vcs remote add https://github.com/my-org/agent-rules.git
+agentsync-vcs sync
+agentsync-vcs pull cursor
 ```
 This will compile both your local rules and all rules from the remote Git repositories.
 

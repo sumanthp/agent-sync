@@ -40,11 +40,11 @@ func Execute() error {
 }
 
 func printUsage() {
-	fmt.Println("agent-sync - Universal Agent VCS")
+	fmt.Println("agentsync-vcs - Universal Agent VCS")
 	fmt.Println("\nUsage:")
-	fmt.Println("  agent-sync <command> [arguments]")
+	fmt.Println("  agentsync-vcs <command> [arguments]")
 	fmt.Println("\nCommands:")
-	fmt.Println("  init          Initialize a new agent-sync project")
+	fmt.Println("  init          Initialize a new agentsync-vcs project")
 	fmt.Println("  remote add <url>  Add a remote Git repository for rules")
 	fmt.Println("  pull <target> Pull and compile rules for a specific tool")
 	fmt.Println("  sync          Sync rules from all remotes and compile")
@@ -54,7 +54,7 @@ func printUsage() {
 func handleInit() error {
 	content := `---
 name: sample-rule
-description: A sample rule for agent-sync
+description: A sample rule for agentsync-vcs
 globs: ["**/*.js"]
 ---
 - Use clean code principles.
@@ -73,13 +73,13 @@ globs: ["**/*.js"]
 		os.WriteFile(".agent-sync/config.json", configData, 0644)
 	}
 
-	fmt.Println("Initialized agent-sync project with sample-rule.md and .agent-sync/config.json")
+	fmt.Println("Initialized agentsync-vcs project with sample-rule.md and .agent-sync/config.json")
 	return nil
 }
 
 func handleRemote() error {
 	if len(os.Args) < 4 || os.Args[2] != "add" {
-		fmt.Println("Usage: agent-sync remote add <url>")
+		fmt.Println("Usage: agentsync-vcs remote add <url>")
 		return nil
 	}
 	url := os.Args[3]
@@ -109,7 +109,7 @@ func handleRemote() error {
 func handleSync() error {
 	config, err := loadConfig()
 	if err != nil || len(config.Remotes) == 0 {
-		fmt.Println("No remotes configured. Use 'agent-sync remote add <url>' first.")
+		fmt.Println("No remotes configured. Use 'agentsync-vcs remote add <url>' first.")
 		return nil
 	}
 
@@ -125,7 +125,7 @@ func handleSync() error {
 
 func handlePull() error {
 	if len(os.Args) < 3 {
-		return fmt.Errorf("usage: agent-sync pull <target>")
+		return fmt.Errorf("usage: agentsync-vcs pull <target>")
 	}
 	target := os.Args[2]
 
@@ -149,7 +149,7 @@ func handlePull() error {
 	}
 
 	// 3. Call Python compiler
-	args := append([]string{"-m", "compiler.main", target}, allFiles...)
+	args := append([]string{"-m", "agentsync_vcs.main", target}, allFiles...)
 	cmd := exec.Command("python", args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
