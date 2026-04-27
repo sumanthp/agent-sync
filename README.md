@@ -4,7 +4,9 @@ Universal Agent VCS and package manager for AI Agent behaviors.
 
 ## Overview
 
-`agentsync-vcs` allows you to define AI agent rules and contexts in a single, universal Markdown format and compile them into native configurations for various AI tools.
+`agentsync-vcs` is not just a file mirror; it is a **behavior compiler and distribution system** for AI agents. 
+
+Unlike tools that merely copy text between IDEs, `agentsync-vcs` allows you to maintain a single, versioned source of truth in Git and compiles it into the optimized, native configuration for every AI tool in your stack (Cursor, Claude Code, Copilot, etc.). It enables engineering teams to enforce architectural standards and "harness engineering" guidelines across any environment.
 
 ### Supported Targets
 - **Cursor**: `.cursor/rules/*.mdc`
