@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agent-sync | Universal Agent VCS</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f6f8fa;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #0366d6;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            font-size: 1.2em;
+            color: #586069;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 1px solid #e1e4e8;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        pre {
+            background: #272822;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            color: #0366d6;
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .feature-item {
+            background: #e1ecf4;
+            color: #39739d;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid #7aa7c7;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #6a737d;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>agent-sync</h1>
+    <p class="tagline">Universal Version Control for AI Agent Behaviors</p>
+    <ul class="feature-list">
+        <li class="feature-item">Cursor</li>
+        <li class="feature-item">Claude Code</li>
+        <li class="feature-item">GitHub Copilot</li>
+        <li class="feature-item">Codex</li>
+        <li class="feature-item">Gemini CLI</li>
+    </ul>
+</header>
+
+<div class="container">
+    <h2>How it Works</h2>
+    <p>Define your AI agent instructions once in <strong>Universal Markdown</strong>, and sync them to every tool in your stack.</p>
+    
+    <div class="grid">
+        <div>
+            <span class="label">1. Define (Universal Markdown)</span>
+            <pre>---
+name: react-strict
+description: Team Standards
+globs: ["src/**/*.tsx"]
+---
+- Use functional components.
+- No 'any' types allowed.</pre>
+        </div>
+        <div>
+            <span class="label">2. Run Sync</span>
+            <pre>$ agent-sync pull cursor
+$ agent-sync pull claude</pre>
+        </div>
+    </div>
+
+    <div class="grid" style="margin-top: 40px;">
+        <div>
+            <span class="label">Target: Cursor (.mdc)</span>
+            <pre>---
+description: Team Standards
+globs:
+- src/**/*.tsx
+alwaysApply: false
+---
+- Use functional components.
+- No 'any' types allowed.</pre>
+        </div>
+        <div>
+            <span class="label">Target: Claude (CLAUDE.md)</span>
+            <pre>## Rule: react-strict
+**Description:** Team Standards
+**Globs:** src/**/*.tsx
+
+- Use functional components.
+- No 'any' types allowed.</pre>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Built for the future of Vibe Coding & Harness Engineering.
+</footer>
+
+</body>
+</html>
