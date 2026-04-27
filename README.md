@@ -49,12 +49,14 @@ globs: ["src/**/*.ts"]
 - Ensure all exports are documented.
 ```
 
-### Pull and Compile
+### Remote Syncing
+Sync rules from a shared team repository:
 ```bash
+agent-sync remote add https://github.com/my-org/agent-rules.git
+agent-sync sync
 agent-sync pull cursor
-agent-sync pull claude
-agent-sync pull copilot
 ```
+This will compile both your local rules and all rules from the remote Git repositories.
 
 ## License
 

@@ -125,20 +125,25 @@ go build -o agent-sync ./cmd/agent-sync</pre>
         <h2><span class="step-number">4</span> Initialize Your Project</h2>
         <p>Navigate to your project root and run the initialization command:</p>
         <pre>$ agent-sync init</pre>
-        <p>This will create a <code>sample-rule.md</code> file which serves as your first universal agent rule.</p>
+        <p>This creates a <code>sample-rule.md</code> and a <code>.agent-sync/config.json</code> file.</p>
     </div>
 
     <div class="step">
-        <h2><span class="step-number">5</span> Sync to Your Tools</h2>
-        <p>Use the <code>pull</code> command followed by your target tool:</p>
+        <h2><span class="step-number">5</span> Connect Remote Rules (Optional)</h2>
+        <p>If your team has a shared repository for agent rules, add it as a remote:</p>
+        <pre>$ agent-sync remote add https://github.com/my-org/agent-rules.git
+$ agent-sync sync</pre>
+        <p>The <code>sync</code> command clones the repository to a local cache on your machine.</p>
+    </div>
+
+    <div class="step">
+        <h2><span class="step-number">6</span> Sync to Your Tools</h2>
+        <p>Use the <code>pull</code> command followed by your target tool. This will compile both local and remote rules:</p>
         <pre># For Cursor
 $ agent-sync pull cursor
 
 # For Claude Code
-$ agent-sync pull claude
-
-# For GitHub Copilot
-$ agent-sync pull copilot</pre>
+$ agent-sync pull claude</pre>
     </div>
 
     <div class="note">
