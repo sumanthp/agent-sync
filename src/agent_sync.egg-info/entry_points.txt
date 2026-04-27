@@ -1,0 +1,2 @@
+[console_scripts]
+agent-sync = agent_sync.cli:main

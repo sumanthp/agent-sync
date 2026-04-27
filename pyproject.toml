@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-sync"
+version = "0.1.0"
+description = "Universal Version Control System for AI Agent behaviors"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0"}
+authors = [
+    {name = "Sumanth Polisetty", email = "sumanth@example.com"}
+]
+dependencies = [
+    "PyYAML>=6.0.1",
+    "pydantic>=2.5.3"
+]
+
+[project.urls]
+Homepage = "https://github.com/sumanthp/agent-sync"
+Repository = "https://github.com/sumanthp/agent-sync"
+
+[project.scripts]
+agent-sync = "agent_sync.cli:main"

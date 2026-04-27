@@ -1,0 +1,8 @@
+---
+description: A sample rule for agent-sync
+globs:
+- '**/*.js'
+alwaysApply: false
+---
+- Use clean code principles.
+- Add comments to complex logic.
