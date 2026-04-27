@@ -56,6 +56,13 @@ agent-sync pull claude
 agent-sync pull copilot
 ```
 
-## Architecture
-- **Go**: Handles CLI, file I/O, and distribution.
-- **Python**: Handles Markdown/YAML parsing and tool-specific translation logic.
+## License
+
+This project is licensed under the **Apache License 2.0 with Commons Clause v1.0**. 
+
+This means:
+- **Free for personal and internal use.**
+- **No Commercial Sale/Hosting:** You cannot sell the software or provide it as a paid service (e.g., hosting, support, or consulting where the value is derived substantially from the software) without explicit permission.
+- **Licensor retains all rights:** The original author (Sumanth Polisetty) retains the right to distribute and sell the software commercially.
+
+See the [LICENSE](LICENSE) file for the full text.
