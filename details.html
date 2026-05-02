@@ -141,13 +141,22 @@
             <div class="arrow">&rarr;</div>
             <div class="arch-box">
                 <strong>Target Files</strong>
-                <p><small>.mdc, CLAUDE.md, SKILL.md, .windsurfrules, .trae, etc.</small></p>
+                <p><small>.mdc, .claude/skills/, .windsurf/rules/, .github/instructions/, etc.</small></p>
             </div>
         </div>
 
         <ul>
             <li><strong>Go Layer:</strong> Provides a single, fast binary for the user. It scans the filesystem, manages project initialization, and orchestrates the sync process.</li>
-            <li><strong>Python Core:</strong> Leveraging Python's rich text-processing ecosystem, the compiler engine parses Universal Markdown, handles complex YAML frontmatter (supporting <code>type: skill</code>, <code>type: global</code>), and executes target-specific adapters for all major AI IDEs.</li>
+            <li><strong>Python Core:</strong> Leveraging Python's rich text-processing ecosystem, the compiler engine parses Universal Markdown, handles complex YAML frontmatter (supporting <code>type: skill</code>, <code>type: global</code>), and executes target-specific adapters for all major AI IDEs based on their official specifications.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Enterprise Readiness & Performance</h2>
+        <ul>
+            <li><strong>High-Performance Engine:</strong> Employs <code>O(1)</code> hash-based file lookups and regex optimization to process <strong>100 rules in ~0.25 seconds</strong> and <strong>500 rules in ~1.1 seconds</strong> on standard hardware.</li>
+            <li><strong>CI/CD & Code Quality:</strong> Built with strict typing (MyPy), automated linting (Ruff), and comprehensive unit/integration testing ensuring >80% code coverage.</li>
+            <li><strong>Security First:</strong> Includes built-in sanitization against path traversal attacks and regex-based Git URL validation, ensuring safe enterprise deployment.</li>
         </ul>
     </div>
 

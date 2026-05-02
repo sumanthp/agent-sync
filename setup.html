@@ -127,22 +127,47 @@ pip install -e .
         <pre>$ agentsync-vcs remote add https://github.com/my-org/agent-rules.git
 $ agentsync-vcs sync</pre>
         <p>The <code>sync</code> command clones the repository to a local cache on your machine.</p>
+        <p><strong>Other Remote Commands:</strong></p>
+        <pre>$ agentsync-vcs remote list     # View configured remotes
+$ agentsync-vcs remote remove https://github.com/my-org/agent-rules.git   # Remove a remote</pre>
     </div>
 
     <div class="step">
-        <h2><span class="step-number">5</span> Sync to Your Tools</h2>
-        <p>Use the <code>pull</code> command followed by your target tool. This will compile both local and remote rules:</p>
-        <pre># For Cursor
+        <h2><span class="step-number">5</span> Define a Rule</h2>
+        <p>Create Universal Markdown rules with YAML frontmatter. You can define advanced routing via the <code>type</code> field (e.g., <code>skill</code> or <code>global</code>):</p>
+        <pre>---
+name: api-expert
+description: Specialized FastAPI skill
+type: skill
+globs: ["src/api/**/*.py"]
+---
+- Use Pydantic for validation.
+- Return HTTP 400 for bad input.</pre>
+    </div>
+
+    <div class="step">
+        <h2><span class="step-number">6</span> Sync to Your Tools</h2>
+        <p>Use the <code>pull</code> command followed by your target tool. This will compile both local and remote rules into the specific IDE formats:</p>
+        <pre># For Cursor (.cursor/rules/*.mdc)
 $ agentsync-vcs pull cursor
 
-# For Claude Code
+# For Claude Code (.claude/skills/)
 $ agentsync-vcs pull claude
 
-# For Windsurf
+# For Windsurf (.windsurf/rules/*.md)
 $ agentsync-vcs pull windsurf
 
-# For Trae
-$ agentsync-vcs pull trae</pre>
+# For Trae (.trae/rules/*.md)
+$ agentsync-vcs pull trae
+
+# For GitHub Copilot (.github/instructions/*.md)
+$ agentsync-vcs pull copilot
+
+# For Gemini (GEMINI.md)
+$ agentsync-vcs pull gemini
+
+# For Codex (AGENTS.md)
+$ agentsync-vcs pull codex</pre>
     </div>
 
     <div class="note">
