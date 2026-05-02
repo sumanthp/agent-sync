@@ -20,9 +20,12 @@ always_apply: true
 ```
 
 **Compiled Results:**
-- **Cursor**: Added to `.cursorrules`.
+- **Cursor**: Added to `.cursor/rules/ts-standards.mdc` with `alwaysApply: true`.
 - **Claude**: Appended to `CLAUDE.md`.
-- **Windsurf**: Added to `.windsurfrules`.
+- **Windsurf**: Added to `.windsurf/rules/ts-standards.md`.
+- **Trae**: Added to `.trae/rules/project_rules.md`.
+- **Copilot**: Appended to `.github/copilot-instructions.md`.
+- **Gemini & Codex**: Appended to `GEMINI.md` and `AGENTS.md`.
 
 ---
 
@@ -46,8 +49,10 @@ globs: ["app/api/**/*.py"]
 
 **Compiled Results:**
 - **Claude Code**: Written to `.claude/skills/api-expert/SKILL.md`.
-- **Trae**: Written to `.trae/skills/api-expert.md`.
+- **Trae**: Written to `.trae/skills/api-expert/SKILL.md`.
+- **Windsurf**: Written to `.windsurf/rules/api-expert.md`.
 - **Cursor**: Written to `.cursor/rules/api-expert.mdc`.
+- **Copilot**: Written to `.github/instructions/api-expert.instructions.md`.
 
 ---
 
@@ -70,7 +75,9 @@ globs: ["src/payments/legacy/**/*.js"]
 **Compiled Results:**
 - **GitHub Copilot**: Written to `.github/instructions/legacy-safety.instructions.md` with `applyTo` set to the legacy path.
 - **Cursor**: Written to `.cursor/rules/legacy-safety.mdc` with appropriate globs.
+- **Claude**: Appended to `CLAUDE.md` with glob context.
 - **Gemini**: Appended to `GEMINI.md` with a scope warning.
+- **Codex**: Appended to `AGENTS.md`.
 
 ---
 

@@ -54,8 +54,12 @@ type: rule # Optional: 'rule', 'skill', or 'global'
 ```
 
 ### Advanced Targets
-- **Claude Code**: Rules with `type: skill` are compiled into `.claude/skills/<name>/SKILL.md`. Others go to `CLAUDE.md`.
-- **Cursor**: Rules with `type: global` or `always_apply: true` (with no globs) are compiled into `.cursorrules`. Others go to `.cursor/rules/*.mdc`.
+- **Cursor**: Rules are compiled into modular `.cursor/rules/*.mdc` files. Use `type: global` for project-wide standards.
+- **Claude Code**: Standard rules merge into `CLAUDE.md`. Use `type: skill` for modular capabilities in `.claude/skills/`.
+- **Windsurf**: All rules are compiled into modular `.windsurf/rules/*.md` files for efficient context loading.
+- **Trae**: Universal guidelines go to `.trae/rules/project_rules.md`. Use `type: skill` for modular `.trae/skills/`.
+- **GitHub Copilot**: Uses `.github/copilot-instructions.md` for global rules and `.github/instructions/*.md` for path-specific ones.
+- **Gemini & Codex**: All rules are intelligently merged into a single source of truth (`GEMINI.md` or `AGENTS.md`).
 
 ### Remote Syncing
 Sync rules from a shared team repository:
