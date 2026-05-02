@@ -4,16 +4,16 @@ from ..models import AgentRule
 
 class CursorAdapter(BaseAdapter):
     def translate(self, rule: AgentRule) -> dict:
-        # Cursor .mdc format is preferred for specific rules
-        if rule.type == "global" or (rule.always_apply and not rule.globs):
-            content = f"\n### {rule.name}\n{rule.body}\n"
-            return {".cursorrules": content}
-            
+        # Cursor .mdc format is the modern standard
+        # Even for "global" rules, we prefer .mdc in the rules directory
+        # with alwaysApply: true for better token efficiency and modularity.
+        
         frontmatter = {
-            "description": rule.description,
+            "description": rule.description or f"Instructions for {rule.name}",
             "globs": rule.globs,
-            "alwaysApply": rule.always_apply
+            "alwaysApply": rule.always_apply or (rule.type == "global")
         }
+        
         # Use safe_dump for cleaner output
         fm_str = yaml.safe_dump(frontmatter, sort_keys=False)
         content = f"---\n{fm_str}---\n{rule.body}"

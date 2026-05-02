@@ -45,7 +45,7 @@ globs: ["app/api/**/*.py"]
 ```
 
 **Compiled Results:**
-- **Claude Code**: Written to `SKILL.md`.
+- **Claude Code**: Written to `.claude/skills/api-expert/SKILL.md`.
 - **Trae**: Written to `.trae/skills/api-expert.md`.
 - **Cursor**: Written to `.cursor/rules/api-expert.mdc`.
 

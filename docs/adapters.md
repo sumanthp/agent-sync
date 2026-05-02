@@ -11,9 +11,9 @@
     - All other rules are compiled into individual `.mdc` files in `.cursor/rules/`.
 
 ### Claude Code
-- **Files**: `CLAUDE.md`, `SKILL.md`
+- **Files**: `CLAUDE.md`, `.claude/skills/<skill-name>/SKILL.md`
 - **Logic**:
-    - Rules with `type: skill` are compiled into `SKILL.md`.
+    - Rules with `type: skill` are compiled into project-specific skills in `.claude/skills/`.
     - All other rules are merged into `CLAUDE.md`.
 
 ### GitHub Copilot

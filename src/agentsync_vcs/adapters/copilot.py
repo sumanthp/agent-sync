@@ -6,8 +6,10 @@ class CopilotAdapter(BaseAdapter):
     def translate(self, rule: AgentRule) -> dict:
         # GitHub Copilot instructions
         if rule.globs:
-            # Path-specific instruction
+            # Targeted instruction requiring applyTo
             frontmatter = {
+                "name": rule.name,
+                "description": rule.description or f"Scope specific rules for {rule.name}",
                 "applyTo": rule.globs
             }
             fm_str = yaml.safe_dump(frontmatter, sort_keys=False)
@@ -17,5 +19,6 @@ class CopilotAdapter(BaseAdapter):
             return {file_path: content}
         else:
             # Global project instruction
+            # Optional frontmatter for name/description can be added even to global
             content = f"\n### {rule.name}\n{rule.body}\n"
             return {".github/copilot-instructions.md": content}

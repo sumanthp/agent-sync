@@ -3,16 +3,18 @@ from ..models import AgentRule
 
 class TraeAdapter(BaseAdapter):
     def translate(self, rule: AgentRule) -> dict:
-        # Trae supports .trae/project_rules.md or .trae/skills/*.md
-        content = f"# {rule.name}\n\n"
-        if rule.description:
-            content += f"**Description:** {rule.description}\n\n"
-        
-        content += rule.body
-        
+        # Trae supports .trae/rules/ (Universal) or .trae/skills/ (Modular)
         if rule.type == "skill":
+            # Skills require a directory with SKILL.md
+            content = f"# Skill: {rule.name}\n"
+            if rule.description:
+                content += f"**Description:** {rule.description}\n\n"
+            content += f"## Instructions\n{rule.body}"
+            
             safe_name = "".join(c for c in rule.name if c.isalnum() or c in ("-", "_")).strip()
-            file_path = f".trae/skills/{safe_name}.md"
+            file_path = f".trae/skills/{safe_name}/SKILL.md"
             return {file_path: content}
             
-        return {".trae/project_rules.md": f"\n{content}\n"}
+        # Universal rules go to .trae/rules/project_rules.md
+        content = f"\n## {rule.name}\n{rule.body}\n"
+        return {".trae/rules/project_rules.md": content}

@@ -6,10 +6,8 @@ SHARED_FILES = [
     "AGENTS.md", 
     "GEMINI.md", 
     ".github/copilot-instructions.md", 
-    "SKILL.md", 
     ".cursorrules", 
-    ".windsurfrules", 
-    ".trae/project_rules.md"
+    ".trae/rules/project_rules.md"
 ]
 
 class AgentRule(BaseModel):

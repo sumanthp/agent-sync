@@ -15,7 +15,7 @@ Unlike tools that merely copy text between IDEs, `agentsync-vcs` allows you to m
 
 ### Supported Targets
 - **Cursor**: `.cursor/rules/*.mdc` and `.cursorrules`
-- **Claude Code**: `CLAUDE.md` and `SKILL.md`
+- **Claude Code**: `CLAUDE.md` and `.claude/skills/`
 - **GitHub Copilot**: `.github/copilot-instructions.md` and `.github/instructions/*.md`
 - **Windsurf**: `.windsurf/rules/*.md` and `.windsurfrules`
 - **Trae**: `.trae/project_rules.md` and `.trae/skills/*.md`
@@ -54,7 +54,7 @@ type: rule # Optional: 'rule', 'skill', or 'global'
 ```
 
 ### Advanced Targets
-- **Claude Code**: Rules with `type: skill` are compiled into `SKILL.md`. Others go to `CLAUDE.md`.
+- **Claude Code**: Rules with `type: skill` are compiled into `.claude/skills/<name>/SKILL.md`. Others go to `CLAUDE.md`.
 - **Cursor**: Rules with `type: global` or `always_apply: true` (with no globs) are compiled into `.cursorrules`. Others go to `.cursor/rules/*.mdc`.
 
 ### Remote Syncing

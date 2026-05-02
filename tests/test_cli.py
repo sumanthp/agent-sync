@@ -55,14 +55,12 @@ globs: ["**/*.py"]
             elif target == "codex":
                 self.assertTrue(os.path.exists("AGENTS.md"))
             elif target == "windsurf":
-                # Windsurf can generate either .windsurfrules or .windsurf/rules/*.md
-                has_global = os.path.exists(".windsurfrules")
-                has_specific = os.path.exists(".windsurf/rules/test-rule.md")
-                self.assertTrue(has_global or has_specific)
+                # Windsurf modern standard is always modular rules
+                self.assertTrue(os.path.exists(".windsurf/rules/test-rule.md"))
             elif target == "trae":
-                # Trae can generate either .trae/project_rules.md or .trae/skills/*.md
-                has_project = os.path.exists(".trae/project_rules.md")
-                has_specific = os.path.exists(".trae/skills/test-rule.md")
+                # Trae modern standard
+                has_project = os.path.exists(".trae/rules/project_rules.md")
+                has_specific = os.path.exists(".trae/skills/test-rule/SKILL.md")
                 self.assertTrue(has_project or has_specific)
 
     def test_pull_merging(self):
@@ -94,11 +92,14 @@ description: A custom skill
             
         handle_pull("claude")
         
-        self.assertTrue(os.path.exists("SKILL.md"))
-        with open("SKILL.md", 'r') as f:
+        skill_path = ".claude/skills/my-skill/SKILL.md"
+        self.assertTrue(os.path.exists(skill_path))
+        with open(skill_path, 'r') as f:
             content = f.read()
             self.assertIn("my-skill", content)
             self.assertIn("Skill behavior", content)
+            # Check for frontmatter
+            self.assertIn("name: my-skill", content)
 
     def test_cursor_global_generation(self):
         # Create a global rule
@@ -114,10 +115,12 @@ description: A global rule
             
         handle_pull("cursor")
         
-        self.assertTrue(os.path.exists(".cursorrules"))
-        with open(".cursorrules", 'r') as f:
+        # Modern Cursor uses .mdc even for global rules
+        rule_path = ".cursor/rules/global-rule.mdc"
+        self.assertTrue(os.path.exists(rule_path))
+        with open(rule_path, 'r') as f:
             content = f.read()
-            self.assertIn("global-rule", content)
+            self.assertIn("alwaysApply: true", content)
             self.assertIn("Global behavior", content)
 
     def test_windsurf_rule_categorization(self):
@@ -131,10 +134,11 @@ description: A global rule
         
         handle_pull("windsurf")
         
-        self.assertTrue(os.path.exists(".windsurfrules"))
+        # Windsurf modern standard is always modular rules in the directory
+        self.assertTrue(os.path.exists(".windsurf/rules/w-global.md"))
         self.assertTrue(os.path.exists(".windsurf/rules/w-spec.md"))
         
-        with open(".windsurfrules", 'r') as f:
+        with open(".windsurf/rules/w-global.md", 'r') as f:
             self.assertIn("Global Windsurf", f.read())
 
     def test_trae_skill_and_merging(self):
@@ -148,10 +152,11 @@ description: A global rule
         
         handle_pull("trae")
         
-        self.assertTrue(os.path.exists(".trae/skills/t-skill.md"))
-        self.assertTrue(os.path.exists(".trae/project_rules.md"))
+        # Trae modular skill path
+        self.assertTrue(os.path.exists(".trae/skills/t-skill/SKILL.md"))
+        self.assertTrue(os.path.exists(".trae/rules/project_rules.md"))
         
-        with open(".trae/project_rules.md", 'r') as f:
+        with open(".trae/rules/project_rules.md", 'r') as f:
             content = f.read()
             self.assertIn("Trae Rule", content)
 
@@ -198,7 +203,7 @@ globs: ["src/api/**/*.py"]
         handle_pull("claude")
         
         self.assertTrue(os.path.exists("CLAUDE.md"))
-        self.assertTrue(os.path.exists("SKILL.md"))
+        self.assertTrue(os.path.exists(".claude/skills/api-expert/SKILL.md"))
         
         with open("CLAUDE.md", 'r', encoding='utf-8') as f:
             content = f.read()
@@ -206,17 +211,17 @@ globs: ["src/api/**/*.py"]
             self.assertIn("class BaseService(ABC):", content)
             self.assertIn("**Domain Driven Design**", content)
             
-        with open("SKILL.md", 'r', encoding='utf-8') as f:
+        with open(".claude/skills/api-expert/SKILL.md", 'r', encoding='utf-8') as f:
             content = f.read()
             self.assertIn("## API Expert Skill", content)
             self.assertIn("`read:items`", content)
 
         # Test Cursor (MDC and Global)
         handle_pull("cursor")
-        self.assertTrue(os.path.exists(".cursorrules"))
+        self.assertTrue(os.path.exists(".cursor/rules/arch-standard.mdc"))
         self.assertTrue(os.path.exists(".cursor/rules/api-expert.mdc"))
         
-        with open(".cursorrules", 'r', encoding='utf-8') as f:
+        with open(".cursor/rules/arch-standard.mdc", 'r', encoding='utf-8') as f:
             self.assertIn("class BaseService(ABC):", f.read())
 
 if __name__ == "__main__":
