@@ -4,8 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentsync-vcs"
-version = "0.1.1"
+version = "0.2.0"
 description = "Universal Version Control System for AI Agent behaviors"
+
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "Apache-2.0"}
