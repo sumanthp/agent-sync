@@ -4,13 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentsync-vcs"
-version = "0.1.0"
+version = "0.1.1"
 description = "Universal Version Control System for AI Agent behaviors"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "Apache-2.0"}
+# Consider using license = "Apache-2.0" in the future for setuptools >= 77.0.0
 authors = [
-    {name = "Sumanth Polisetty", email = "sumanth@example.com"}
+    {name = "Sumanth Polisetty", email = "sumanthpolisetty.sp@gmail.com"}
 ]
 dependencies = [
     "PyYAML>=6.0.1",
@@ -23,3 +24,24 @@ Repository = "https://github.com/sumanthp/agent-sync"
 
 [project.scripts]
 agentsync-vcs = "agentsync_vcs.cli:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "I"]
+ignore = []
+
+[tool.mypy]
+python_version = "3.8"
+strict = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["src/agentsync_vcs"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 80

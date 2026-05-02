@@ -12,7 +12,8 @@ class CopilotAdapter(BaseAdapter):
             }
             fm_str = yaml.safe_dump(frontmatter, sort_keys=False)
             content = f"---\n{fm_str}---\n{rule.body}"
-            file_path = f".github/instructions/{rule.name}.instructions.md"
+            safe_name = "".join(c for c in rule.name if c.isalnum() or c in ("-", "_")).strip()
+            file_path = f".github/instructions/{safe_name}.instructions.md"
             return {file_path: content}
         else:
             # Global project instruction

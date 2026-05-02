@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+.venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+.cursor/rules/*.mdc
+.cursorrules
+
+# Project Specific
+.agent-sync/cache/
+.agent-sync/config.json
+*.md
+!README.md
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!SECURITY.md
+!sample-rule.md
+!docs/*.md
+
+# Coverage
+.coverage
+htmlcov/
+coverage.xml
+
+# Go
+bin/
+*.exe

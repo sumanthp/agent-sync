@@ -19,12 +19,19 @@ def parse_markdown_rule(content: str) -> AgentRule:
     frontmatter_raw = match.group(1)
     body = match.group(2).strip()
     
-    frontmatter = yaml.safe_load(frontmatter_raw)
+    try:
+        frontmatter = yaml.safe_load(frontmatter_raw)
+    except yaml.YAMLError as e:
+        raise ValueError(f"Invalid YAML frontmatter: {e}")
+        
+    if not isinstance(frontmatter, dict):
+        raise ValueError("Invalid format: Frontmatter must be a YAML dictionary")
     
     return AgentRule(
-        name=frontmatter.get('name', 'unnamed'),
-        description=frontmatter.get('description', ''),
-        globs=frontmatter.get('globs', []),
-        always_apply=frontmatter.get('always_apply', False),
+        name=str(frontmatter.get('name', 'unnamed')),
+        description=str(frontmatter.get('description', '')),
+        globs=frontmatter.get('globs', []) if isinstance(frontmatter.get('globs'), list) else [],
+        always_apply=bool(frontmatter.get('always_apply', False)),
+        type=str(frontmatter.get('type', 'rule')),
         body=body
     )

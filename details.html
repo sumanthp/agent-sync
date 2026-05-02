@@ -141,13 +141,13 @@
             <div class="arrow">&rarr;</div>
             <div class="arch-box">
                 <strong>Target Files</strong>
-                <p><small>.mdc, CLAUDE.md, AGENTS.md, etc.</small></p>
+                <p><small>.mdc, CLAUDE.md, SKILL.md, .windsurfrules, .trae, etc.</small></p>
             </div>
         </div>
 
         <ul>
             <li><strong>Go Layer:</strong> Provides a single, fast binary for the user. It scans the filesystem, manages project initialization, and orchestrates the sync process.</li>
-            <li><strong>Python Layer:</strong> Leveraging Python's rich text-processing ecosystem, the compiler engine parses Universal Markdown, handles complex YAML frontmatter, and executes target-specific adapters.</li>
+            <li><strong>Python Core:</strong> Leveraging Python's rich text-processing ecosystem, the compiler engine parses Universal Markdown, handles complex YAML frontmatter (supporting <code>type: skill</code>, <code>type: global</code>), and executes target-specific adapters for all major AI IDEs.</li>
         </ul>
     </div>
 

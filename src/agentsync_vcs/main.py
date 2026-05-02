@@ -1,22 +1,28 @@
 import sys
 import os
 import json
+from typing import Dict, List
 from .parser import parse_markdown_rule
 from .adapters.cursor import CursorAdapter
 from .adapters.claude import ClaudeAdapter
 from .adapters.copilot import CopilotAdapter
 from .adapters.codex import CodexAdapter
 from .adapters.gemini import GeminiAdapter
+from .adapters.windsurf import WindsurfAdapter
+from .adapters.trae import TraeAdapter
+from .models import SHARED_FILES
 
 ADAPTERS = {
     "cursor": CursorAdapter(),
     "claude": ClaudeAdapter(),
     "copilot": CopilotAdapter(),
     "codex": CodexAdapter(),
-    "gemini": GeminiAdapter()
+    "gemini": GeminiAdapter(),
+    "windsurf": WindsurfAdapter(),
+    "trae": TraeAdapter()
 }
 
-def main():
+def main() -> None:
     if len(sys.argv) < 3:
         print("Usage: python -m agentsync_vcs.main <target> <file1> <file2> ...")
         sys.exit(1)
@@ -29,13 +35,9 @@ def main():
         sys.exit(1)
     
     adapter = ADAPTERS[target]
-    all_translated = {} # {file_path: content}
+    all_translated: Dict[str, str] = {} # {file_path: content}
     
     for file_path in files:
-        if not os.path.exists(file_path):
-            # Try relative to CWD if not absolute
-            pass
-            
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
@@ -45,8 +47,8 @@ def main():
             
             for path, text in translated.items():
                 if path in all_translated:
-                    # Append if it's a shared file like CLAUDE.md or AGENTS.md
-                    if path in ["CLAUDE.md", "AGENTS.md", "GEMINI.md", ".github/copilot-instructions.md"]:
+                    # Append if it's a shared file
+                    if path in SHARED_FILES:
                         all_translated[path] += "\n" + text
                     else:
                         all_translated[path] = text
