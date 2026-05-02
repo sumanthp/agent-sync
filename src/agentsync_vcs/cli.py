@@ -64,6 +64,25 @@ def handle_remote_add(url: str) -> None:
     save_config(config)
     print(f"Added remote: {url}")
 
+def handle_remote_list() -> None:
+    config = load_config()
+    remotes = config.get("remotes", [])
+    if not remotes:
+        print("No remotes configured.")
+        return
+    print("Configured remotes:")
+    for url in remotes:
+        print(f"  - {url}")
+
+def handle_remote_remove(url: str) -> None:
+    config = load_config()
+    if url not in config["remotes"]:
+        print(f"Remote not found: {url}")
+        return
+    config["remotes"].remove(url)
+    save_config(config)
+    print(f"Removed remote: {url}")
+
 def sync_remote(url: str) -> None:
     if not validate_url(url):
         raise ValueError(f"Invalid git URL: {url}")
@@ -155,8 +174,11 @@ def main() -> None:
 Examples:
   agentsync-vcs init
   agentsync-vcs remote add https://github.com/org/rules.git
+  agentsync-vcs remote list
   agentsync-vcs sync
   agentsync-vcs pull cursor
+  agentsync-vcs pull claude
+  agentsync-vcs pull windsurf
         """
     )
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -186,6 +208,17 @@ Examples:
     )
     add_parser.add_argument("url", help="URL of the git repository")
 
+    remote_sub.add_parser(
+        "list", 
+        help="List configured remote repositories"
+    )
+
+    remove_parser = remote_sub.add_parser(
+        "remove", 
+        help="Remove a configured remote repository"
+    )
+    remove_parser.add_argument("url", help="URL of the git repository to remove")
+
     # Sync
     subparsers.add_parser(
         "sync", 
@@ -210,10 +243,18 @@ Examples:
     elif args.command == "remote":
         if args.subcommand == "add":
             handle_remote_add(args.url)
+        elif args.subcommand == "list":
+            handle_remote_list()
+        elif args.subcommand == "remove":
+            handle_remote_remove(args.url)
+        else:
+            remote_parser.print_help()
     elif args.command == "sync":
         handle_sync()
     elif args.command == "pull":
         handle_pull(args.target)
+    elif args.command == "help":
+        parser.print_help()
     else:
         parser.print_help()
 
