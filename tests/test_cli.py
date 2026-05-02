@@ -59,7 +59,7 @@ globs: ["**/*.py"]
                 self.assertTrue(os.path.exists(".windsurf/rules/test-rule.md"))
             elif target == "trae":
                 # Trae modern standard
-                has_project = os.path.exists(".trae/rules/project_rules.md")
+                has_project = os.path.exists(".trae/rules/test-rule.md")
                 has_specific = os.path.exists(".trae/skills/test-rule/SKILL.md")
                 self.assertTrue(has_project or has_specific)
 
@@ -154,9 +154,9 @@ description: A global rule
         
         # Trae modular skill path
         self.assertTrue(os.path.exists(".trae/skills/t-skill/SKILL.md"))
-        self.assertTrue(os.path.exists(".trae/rules/project_rules.md"))
+        self.assertTrue(os.path.exists(".trae/rules/t-rule.md"))
         
-        with open(".trae/rules/project_rules.md", 'r') as f:
+        with open(".trae/rules/t-rule.md", 'r') as f:
             content = f.read()
             self.assertIn("Trae Rule", content)
 
@@ -226,3 +226,4 @@ globs: ["src/api/**/*.py"]
 
 if __name__ == "__main__":
     unittest.main()
+
